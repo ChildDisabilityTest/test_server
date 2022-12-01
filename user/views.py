@@ -5,14 +5,6 @@ from rest_framework.viewsets import ModelViewSet
 import os, csv
 
 # Create your views here.
-"""
-{
-    "name":"김아무개",
-    "birthDate":"1980-12-1",
-    "email":"aa@aa.com",
-    "privacy_agree":"True"
-}
-"""
 class TesterViewSet(ModelViewSet):
     serializer_class = TesterSerializer
     queryset = Tester.objects.all()
@@ -30,6 +22,5 @@ def upload_incheon():
         reader = csv.reader(f, delimiter=',')
         for row in reader:
             print(row)
-
 
     return
