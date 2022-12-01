@@ -8,4 +8,6 @@ router.register(r'child', ChildViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('gulist', GuList.as_view()),
+    path('emdlist/<str:gu>', EmdList.as_view()),
 ]

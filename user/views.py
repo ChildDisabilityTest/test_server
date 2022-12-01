@@ -3,6 +3,8 @@ from .models import *
 from .serializers import *
 from rest_framework.viewsets import ModelViewSet
 import os, csv
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 # Create your views here.
 class TesterViewSet(ModelViewSet):
@@ -36,3 +38,21 @@ def upload_incheon():
     I = IncheonRegion.objects.bulk_create(bulk_list)
     print("!!Incheon Region upload success!!")
     return
+
+class GuList(APIView):
+    def get(self, request):
+        queryset = IncheonRegion.objects.distinct().values_list('gu')
+        gu_list = []
+        for q in queryset:
+            gu_list.append(q[0])
+        print(gu_list)
+        return Response(gu_list)
+
+class EmdList(APIView):
+    def get(self, request, gu):
+        queryset = IncheonRegion.objects.filter(gu=gu)
+        print(queryset)
+        # serializer_context = {'request': request}
+        # serializer_class = IncheonRegionSerializer(queryset, many=True, context=serializer_context)
+        # return Response(serializer_class.data)
+        return Response({"response":"test"})

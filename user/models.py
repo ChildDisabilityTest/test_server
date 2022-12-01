@@ -29,3 +29,6 @@ class IncheonRegion(models.Model):
     si = models.CharField(max_length=10, null=True, blank=True, help_text="시")
     gu = models.CharField(max_length=10, null=True, blank=True, help_text="구/군")
     emd = models.CharField(max_length=10, null=True, blank=True, help_text="읍면동")
+
+    def __str__(self):
+        return self.si + " " + self.gu + " " + self.emd

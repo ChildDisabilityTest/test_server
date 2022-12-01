@@ -10,3 +10,8 @@ class ChildSerializer(serializers.ModelSerializer):
     class Meta:
         model = Child
         fields = ['url', 'name', 'birthDate', 'residence', 'gender', 'kindergarden', 'testDate', 'tester']
+
+class IncheonRegionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IncheonRegion
+        fields = ['url', 'si', 'gu', 'emd']
