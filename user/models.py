@@ -24,3 +24,8 @@ class Child(models.Model):
     kindergarden = models.CharField(max_length=20, null=True, blank=True, help_text="유치원 이름")
     testDate = models.DateField(null=True, blank=True, help_text="검사일")
     tester = models.ForeignKey(Tester, on_delete=models.CASCADE, related_name="child", null=True, blank=True, help_text="검사자")
+
+class IncheonRegion(models.Model):
+    si = models.CharField(max_length=10, null=True, blank=True, help_text="시")
+    gu = models.CharField(max_length=10, null=True, blank=True, help_text="구/군")
+    emd = models.CharField(max_length=10, null=True, blank=True, help_text="읍면동")
