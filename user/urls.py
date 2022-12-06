@@ -5,9 +5,10 @@ from .views import *
 router = routers.DefaultRouter()
 router.register(r'tester', TesterViewSet)
 router.register(r'child', ChildViewSet)
+router.register(r'incheon', IncheonRegionViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('gulist', GuList.as_view()),
-    path('emdlist/<str:gu>', EmdList.as_view()),
+    path('gulist/', GuList.as_view()),
+    path('emdlist/', Emdlist.as_view()),
 ]

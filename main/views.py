@@ -42,9 +42,10 @@ def upload_questions():
 
 # 그룹별(A/B/C)로 질문 리스트 반환
 # ex) 그룹A
-# /api/main/questionlistbygroup/A
+# /api/main/questionlistbygroup?group=A
 class QuestionListByGroup(APIView):
-    def get(self, request, group):
+    def get(self, request):
+        group = self.request.query_params.get('group')
         queryset = Question.objects.filter(group=group)
         serializer_context = {'request': request}
         serializer_class = QuestionSerializer(queryset, many=True, context=serializer_context)
@@ -52,9 +53,11 @@ class QuestionListByGroup(APIView):
 
 # 번호 범위대로 질문 리스트 반환
 # ex) 11번 ~ 15번
-# /api/main/questionlistbynumber/11/15
+# /api/main/questionlistbynumber?min=11&max=15
 class QuestionListByNumber(APIView):
-    def get(self, request, min, max):
+    def get(self, request):
+        min = self.request.query_params.get('min')
+        max = self.request.query_params.get('max')
         queryset = Question.objects.filter(number__range=[min, max])
         serializer_context = {'request': request}
         serializer_class = QuestionSerializer(queryset, many=True, context=serializer_context)

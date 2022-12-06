@@ -15,6 +15,10 @@ class ChildViewSet(ModelViewSet):
     serializer_class = ChildSerializer
     queryset = Child.objects.all()
 
+class IncheonRegionViewSet(ModelViewSet):
+    serializer_class = IncheonRegionSerializer
+    queryset = IncheonRegion.objects.all()
+
 # 인천 지역정보 업로드
 def upload_incheon():
     f_path = os.path.abspath(os.path.join(
@@ -39,6 +43,8 @@ def upload_incheon():
     print("!!Incheon Region upload success!!")
     return
 
+# 인천광역시 **구 리스트
+# /api/user/gulist
 class GuList(APIView):
     def get(self, request):
         queryset = IncheonRegion.objects.distinct().values_list('gu')
@@ -48,11 +54,13 @@ class GuList(APIView):
         print(gu_list)
         return Response(gu_list)
 
-class EmdList(APIView):
-    def get(self, request, gu):
+# 인천광역시 **구 $$동 리스트
+# ex) 인천광역시 남구에 있는 읍면동 리스트
+# /api/user/emdlist?gu=남구
+class Emdlist(APIView):
+    def get(self, request):
+        gu = self.request.query_params.get('gu')
         queryset = IncheonRegion.objects.filter(gu=gu)
-        print(queryset)
-        # serializer_context = {'request': request}
-        # serializer_class = IncheonRegionSerializer(queryset, many=True, context=serializer_context)
-        # return Response(serializer_class.data)
-        return Response({"response":"test"})
+        serializer_context = {'request': request}
+        serializer_class = IncheonRegionSerializer(queryset, many=True, context=serializer_context)
+        return Response(serializer_class.data)
