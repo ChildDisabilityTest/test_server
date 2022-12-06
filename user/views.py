@@ -11,6 +11,19 @@ class TesterViewSet(ModelViewSet):
     serializer_class = TesterSerializer
     queryset = Tester.objects.all()
 
+# 아동 정보 기입 (POST)
+# /api/user/child/
+"""
+{
+    "name":"김아동",
+    "birthDate":"2020-12-06",
+    "residence":1,
+    "gender":"M",
+    "kindergarden":"뫄뫄유치원",
+    "testDate":"2022-12-06",
+    "tester":1
+}
+"""
 class ChildViewSet(ModelViewSet):
     serializer_class = ChildSerializer
     queryset = Child.objects.all()
